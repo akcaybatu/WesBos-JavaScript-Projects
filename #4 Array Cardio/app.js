@@ -20,3 +20,30 @@ const inventors = [
     'Berne, Eric', 'Berra, Yogi', 'Berry, Wendell', 'Bevan, Aneurin', 'Ben-Gurion, David', 'Bevel, Ken', 'Biden, Joseph', 'Bennington, Chester', 'Bierce, Ambrose',
     'Billings, Josh', 'Birrell, Augustine', 'Blair, Tony', 'Beecher, Henry', 'Biondo, Frank'
   ];
+
+// Inventors born in 1500's
+const fifteen = inventors.filter(inventor => (inventor.year >= 1500 && inventor.year < 1600));
+
+console.table(fifteen);
+
+// First and last names of inventors
+const fullName = inventors.map(inventor => `${inventor.first} ${inventor.last}`);
+
+console.table(fullName);
+
+// Sort by birthdate
+const ordered = inventors.sort(function(a, b){
+  if(a.year > b.year)
+    return 1;
+  else
+    return -1;
+});
+
+console.table(ordered);
+
+// Sum of inventors lifetime
+const totalYears = inventors.reduce((total, inventor) => {
+  return total + (inventor.passed - inventor.year);
+}, 0);
+
+console.table(totalYears);
