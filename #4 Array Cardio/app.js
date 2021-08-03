@@ -21,29 +21,76 @@ const inventors = [
     'Billings, Josh', 'Birrell, Augustine', 'Blair, Tony', 'Beecher, Henry', 'Biondo, Frank'
   ];
 
-// Inventors born in 1500's
+// 1. Inventors born in 1500's
 const fifteen = inventors.filter(inventor => (inventor.year >= 1500 && inventor.year < 1600));
+
+// const fifteen = inventors.filter(function(inventor){
+//   if (inventor.year >= 1500 && inventor.year < 1600) {
+//     return true
+//   }
+//   else{
+//     return false;
+//   }
+// });
 
 console.table(fifteen);
 
-// First and last names of inventors
+// 2. First and last names of inventors
 const fullName = inventors.map(inventor => `${inventor.first} ${inventor.last}`);
 
 console.table(fullName);
 
-// Sort by birthdate
-const ordered = inventors.sort(function(a, b){
-  if(a.year > b.year)
-    return 1;
-  else
-    return -1;
-});
+// 3. Sort by birthdate
+// const ordered = inventors.sort(function(a, b){
+//   if(a.year > b.year)
+//     return 1;
+//   else
+//     return -1;
+// });
+
+const ordered = inventors.sort((a, b) => a.year > b.year ? 1 : -1);
 
 console.table(ordered);
 
-// Sum of inventors lifetime
+// 4. Sum of inventors lifetime
 const totalYears = inventors.reduce((total, inventor) => {
   return total + (inventor.passed - inventor.year);
 }, 0);
 
 console.table(totalYears);
+
+// 5. Sort inventors by years lived
+const oldest = inventors.sort(function(c, d){
+  const lastGuy = c.passed - c.year;
+  const nextGuy = d.passed - d.year;
+  return lastGuy > nextGuy ? -1 : 1;
+});
+
+console.table(oldest);
+
+// 6. Go to this Website https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
+const category = Array.from(document.querySelectorAll('.mw-category a'));
+const de = category
+          .map(link => link.textContent)
+          .filter(streetName => streetName.includes('de'));
+console.table(de);
+
+// 7. Alphabetic sort
+const alpha = people.sort((lastOne, nextOne) => {
+  const[aLast, aFirst] = lastOne.split(', ');
+  const[bLast, bFirst] = nextOne.split(', ');
+  return aLast > bLast ? 1: -1;
+});
+console.table(alpha);
+
+// 8. Sum pu the instances
+const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck', 'pogostick'];
+
+const transportation = data.reduce(function(obj, item){
+  if (!obj[item]) {
+    obj[item] = 0;
+  }
+  obj[item]++;
+  return obj;
+}, {});
+console.table(transportation);
